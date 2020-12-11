@@ -4,6 +4,7 @@ import path from "path";
 import dotenv from "dotenv";
 import router from "./routes/api/lights.js";
 
+
 dotenv.config();
 
 const app = express();
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/lights", router);
 
-const db = process.env.DB;
+let db = process.env.DB;
 
 mongoose
   .connect(db, {

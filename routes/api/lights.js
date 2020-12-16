@@ -27,17 +27,21 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async(req, res)=>  {
-    try {
-      const light = await Light.findOneAndUpdate({_id:id}, req.body, {new:true});
+router.put("/:id", async (req, res) => {
+  try {
+    const light = await Light.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    );
 
-      if(!light){
-        throw Error("bad data/ put request");
-      }
-      res.status(200).json(light)
-    } catch (error) {
-      res.status(400).json({msg: error.message});
+    if (!light) {
+      throw Error("bad data/ put request");
     }
-})
+    res.status(200).json(light);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
 
 export default router;
